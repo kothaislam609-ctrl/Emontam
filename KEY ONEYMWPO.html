@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMONTEAM</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#050014;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:white;
+overflow:hidden;
+}
+
+.container{
+width:360px;
+background:#0b0620;
+border:2px solid #8a2be2;
+border-radius:25px;
+padding:20px;
+box-shadow:0 0 35px #8a2be2;
+text-align:center;
+}
+
+.status{
+display:inline-block;
+padding:8px 20px;
+border-radius:30px;
+background:#081f2c;
+color:#00ffe5;
+font-size:14px;
+box-shadow:0 0 10px #00ffe5;
+margin-bottom:20px;
+}
+
+.logo{
+width:100px;
+height:100px;
+border-radius:50%;
+border:3px solid #ff00ff;
+margin:10px auto 20px;
+background:url('https://i.imgur.com/7k12EPD.jpeg') center/cover;
+box-shadow:0 0 20px #ff00ff;
+}
+
+h1{
+font-size:40px;
+margin-bottom:10px;
+background:linear-gradient(to right,#b366ff,#00ffff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.sub{
+font-size:12px;
+letter-spacing:3px;
+color:#888;
+margin-bottom:25px;
+}
+
+.boxes{
+display:flex;
+justify-content:space-between;
+margin-bottom:20px;
+}
+
+.box{
+width:30%;
+padding:15px 5px;
+border-radius:20px;
+background:#12052e;
+border:2px solid #6a00ff;
+}
+
+.box h2{
+font-size:22px;
+margin-bottom:5px;
+}
+
+.box p{
+font-size:11px;
+color:#aaa;
+}
+
+.info{
+background:#180833;
+padding:15px;
+border-radius:15px;
+line-height:24px;
+font-size:14px;
+margin-bottom:20px;
+}
+
+.generate{
+width:100%;
+padding:16px;
+font-size:17px;
+font-weight:bold;
+border:none;
+border-radius:15px;
+background:linear-gradient(90deg,#ff00ff,#00ffff);
+color:white;
+cursor:pointer;
+box-shadow:0 0 20px #ff00ff;
+transition:0.3s;
+}
+
+.generate:hover{
+transform:scale(1.04);
+}
+
+.keybox{
+margin-top:20px;
+padding:15px;
+border-radius:15px;
+background:#12052e;
+border:1px solid #00ffff;
+font-size:18px;
+word-break:break-all;
+}
+
+.bottom{
+margin-top:20px;
+display:flex;
+justify-content:space-around;
+font-size:12px;
+color:#aaa;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="status">
+SYSTEM ONLINE
+</div>
+
+<div class="logo"></div>
+
+<h1>EMONTEAM</h1>
+
+<div class="sub">
+PREMIUM LICENSE GENERATOR
+</div>
+
+<div class="boxes">
+
+<div class="box">
+<h2>12H</h2>
+<p>VALIDITY</p>
+</div>
+
+<div class="box">
+<h2>1</h2>
+<p>DEVICE</p>
+</div>
+
+<div class="box">
+<h2>FAST</h2>
+<p>DELIVERY</p>
+</div>
+
+</div>
+
+<div class="info">
+Click below to generate your free license key.<br>
+Valid for 12 hours on 1 device only.
+</div>
+
+<button class="generate" onclick="generateKey()">
+GENERATE LICENSE KEY
+</button>
+
+<div class="keybox" id="keyBox">
+Your key will appear here
+</div>
+
+<div class="bottom">
+<span>ENCRYPTED</span>
+<span>SECURED</span>
+<span>ONLINE</span>
+</div>
+
+</div>
+
+<script>
+
+// DEVICE ID
+function getDeviceID(){
+return navigator.userAgent + screen.width + screen.height;
+}
+
+// GENERATE KEY
+function generateKey(){
+
+const deviceID = getDeviceID();
+
+const oldKey = localStorage.getItem(deviceID);
+
+if(oldKey){
+
+document.getElementById("keyBox").innerHTML = oldKey;
+
+alert("This device already generated a key!");
+
+return;
+
+}
+
+// RANDOM KEY
+const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+let key = "UM-";
+
+for(let i=0;i<12;i++){
+
+key += chars.charAt(
+Math.floor(Math.random()*chars.length)
+);
+
+}
+
+// SAVE KEY
+localStorage.setItem(deviceID,key);
+
+// SHOW KEY
+document.getElementById("keyBox").innerHTML = key;
+
+// AUTO COPY
+navigator.clipboard.writeText(key);
+
+alert("License Key Generated!");
+
+}
+
+</script>
+
+</body>
+</html>
